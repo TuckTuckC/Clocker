@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:clocker/providers/timeState.dart';
 import 'package:clocker/pages/homepage.dart';
 import 'package:clocker/pages/timeclock.dart';
 
@@ -10,14 +12,18 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
-        useMaterial3: true,
+Widget build(BuildContext context) {
+    // Wrap the MaterialApp with ChangeNotifierProvider
+    return ChangeNotifierProvider(
+      create: (context) => TimeClockedIn(), // Here we instantiate the state provider
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurpleAccent),
+          useMaterial3: true,
+        ),
+        home: const MainScreen(), // MainScreen now has access to the TimeClockedIn state
       ),
-      home: const MainScreen(),
     );
   }
 }
@@ -34,8 +40,8 @@ class _MainScreenState extends State<MainScreen> {
 
   // Define your pages here
   final List<Widget> _pages = [
-    HomePage(),   // Assuming HomePage is a separate widget
-    TimeClock(),  // Assuming TimeClock is a separate widget  // You need to create this page
+    const HomePage(),   // Assuming HomePage is a separate widget
+    const TimeClock(),  // Assuming TimeClock is a separate widget  // You need to create this page
   ];
 
   void _onTap(int index) {
