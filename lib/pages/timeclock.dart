@@ -63,7 +63,7 @@ class _TimeClockState extends State<TimeClock> {
                   // Determine the button text based on whether the user is clocked in or out.
                   final isClockedIn = timeClockedIn.clockedInTime != null;
                   // Display the elapsed time if clocked in, otherwise show '00:00'.
-                  final elapsedTime = isClockedIn ? _formatDuration(timeClockedIn.elapsed) : '00:00';
+                  final elapsedTime = isClockedIn ? _formatDuration(timeClockedIn.elapsed) : '00:00:00';
                   return Column(
                     mainAxisSize: MainAxisSize.min, // Minimize the column size to fit its children.
                     children: [
